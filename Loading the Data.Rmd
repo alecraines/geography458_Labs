@@ -1,0 +1,32 @@
+---
+title: "Loading The Data"
+author: "Alec Raines"
+date: "January 14, 2019"
+output: html_document
+---
+
+#Loading The Data
+This is how to load data into R and how to convert it.
+
+```{r echo=FALSE}
+library(tidyverse)
+library(tibble)
+
+rawData = read.csv("China_EO_49to17.csv")
+#saveTib = as_tibble(rawData)
+  #arrange(rawData, desc(Year))
+
+
+
+
+
+```
+
+```{r}
+selectData = as_tibble(select(rawData, "Year", "Beijing_Enterprise", "Beijing_Output", "Shanghai_Enterprise", "Shanghai_Output"))
+filterData = as_tibble(filter(selectData, Year >= 2000))
+mutation = mutate(filterData,
+                 Output_Ratio = Beijing_Output / Shanghai_Output)
+print(mutation)
+print(mutation[,c(1,3,5,6)])
+```
